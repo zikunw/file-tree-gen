@@ -63,7 +63,7 @@ async function readPath(path: string): Promise<DirOrFile> {
 };
 
 function parser(dirOrFile: DirOrFile): string {
-    return parserRec(dirOrFile, 1, false);
+    return parserRec(dirOrFile, 1, true, "");
 };
 
 function getName(path: string): string {
@@ -71,13 +71,21 @@ function getName(path: string): string {
     return splitted[splitted.length - 1];
 }
 
-function parserRec(dirOrFile: DirOrFile, depth: number, isLast: boolean): string {
+function parserRec(dirOrFile: DirOrFile, depth: number, isLast: boolean, prevPadding: string): string {
+
+    let curPadding: string = "";
+    if (isLast) {
+        curPadding = prevPadding + "    ";
+    } else {
+        curPadding = prevPadding + "│   ";
+    }
+
     if (dirOrFile.type === "file") {
-        return `${"│   ".repeat(depth-1)}${isLast ? "└── " : "├── " } ${dirOrFile.name}`;
+        return `${prevPadding}${isLast ? "└── " : "├── " } ${dirOrFile.name}`;
     } else {
         // if the directory is empty
         if (dirOrFile.children.length === 0) {
-            return `${"│   ".repeat(depth-1)}└── ${dirOrFile.name}`;
+            return `${prevPadding}└── ${dirOrFile.name}`;
         }
         // sort the children so that directories come first, then files
         const sortedChildren = dirOrFile.children.sort((a, b) => {
@@ -90,10 +98,10 @@ function parserRec(dirOrFile: DirOrFile, depth: number, isLast: boolean): string
             };
         });
         // parse the children
-        let result = `${"│   ".repeat(depth-1)}${isLast ? "└── ": "├── " }${dirOrFile.name}\n`;
+        let result = `${prevPadding}${isLast ? "└── ": "├── " }${dirOrFile.name}\n`;
         for (let i = 0; i < sortedChildren.length; i++) {
             const child = sortedChildren[i];
-            result += parserRec(child, depth + 1, i === sortedChildren.length - 1);
+            result += parserRec(child, depth + 1, i === sortedChildren.length - 1, curPadding);
             result += i === sortedChildren.length - 1 ? "" : "\n";
         };
 
