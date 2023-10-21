@@ -20,3 +20,8 @@ Then by default the result will be save to `result.txt`:
 │   │   └──  sub_text.txt
 │   └──  example_text.txt
 ```
+
+## Todo
+- [ ] Limit max depth
+- [ ] Ignore file by matching file name
+- [ ] Allow only show directory
