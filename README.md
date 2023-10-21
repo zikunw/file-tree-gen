@@ -17,6 +17,9 @@ Then by default the result will be save to `result.txt`:
 │   ├── subfolder_1
 │   │   └──  sub_text.txt
 │   ├── subfolder_2
-│   │   └──  sub_text.txt
-│   └──  example_text.txt
+│   │   ├──  sub_text_1.txt
+│   │   ├──  sub_text_2.txt
+│   │   └──  sub_text_3.txt
+│   ├──  example_text_1.txt
+│   └──  example_text_2.txt
 ```
