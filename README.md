@@ -23,3 +23,8 @@ Then by default the result will be save to `result.txt`:
 │   ├──  example_text_1.txt
 │   └──  example_text_2.txt
 ```
+
+## Todo
+- [ ] Limit max depth
+- [ ] Ignore file by matching file name
+- [ ] Allow only show directory
